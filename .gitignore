@@ -1,0 +1,5 @@
+remo/__pycache__
+remo/config.ini
+
+data/remo_data/remo_data.db
+remo/web/data/remo_data.db

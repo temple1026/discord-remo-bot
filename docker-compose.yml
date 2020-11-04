@@ -1,0 +1,34 @@
+version: '3'
+services:
+  nginx:
+    build: ./nginx
+    image: nginx-home:latest
+    container_name: nginx
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./data/html:/var/www/html
+      - ./remo/web/data:/var/www/html/env/data
+    depends_on:
+      - remo
+      - php
+    restart: always
+
+  php:
+    build: ./php
+    container_name: php
+    image: php-home:latest
+    volumes:
+      - ./data/html:/var/www/html
+      - ./remo/web/data:/var/www/html/env/data
+    restart: always
+
+  remo:
+    build: ./remo
+    image: remo-home:latest
+    container_name: remo
+    volumes:
+      - ./remo/web/data:/app/remo/web/data
+    restart: always
+
